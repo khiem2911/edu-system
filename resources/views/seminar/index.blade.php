@@ -3,6 +3,11 @@
 @section('content')
 <div id="content-wrapper" class="d-flex flex-column">
   <!-- Main Content -->
+  <div class="container">
+    <div class="search">
+        <input type="search" name="search" id="search" placeholder="Search seminar here" class="form-control" >
+    </div>
+</div>
       <div class="container-fluid">
           <div class="d-flex align-items-center justify-content-between">
               <h1 class="mb-0">
