@@ -27,3 +27,5 @@ Route::get('/', function() {
 
 Route::get('/seminar',[SeminarController::class, 'index']); // ebs
 Route::get('/seminar',[SeminarController::class, 'create']);
+
+Route::get('/essay',[EssayController::class, 'index']);
