@@ -25,5 +25,5 @@ Route::get('/', function() {
     return view('dashboard');
 });
 
-Route::get('/seminar',[SeminarController::class, 'index']);
-
+Route::get('/seminar',[SeminarController::class, 'index']); // ebs
+Route::get('/seminar',[SeminarController::class, 'create']);
