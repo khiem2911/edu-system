@@ -12,20 +12,18 @@ use App\Http\Controllers\SeminarController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/', [SeminarController::class, 'loadData'])->name("home");
-// Route::get('/checkDelete',[SeminarController::class, 'deleteSeminar'])->name("deleteSeminar");
-// Route::post('deleteAll',[SeminarController::class, 'deleteAllSeminar'])->name("deleteAll");
-// Route::get('EditSer/{id}',[SeminarController::class, 'editSeminar'])->name("editSeminar");
-// Route::post('updateSer/{id}',[SeminarController::class, 'updateSeminar'])->name("updateSeminar");
-// Route::get('/search',[SeminarController::class, 'searchSeminar'])->name("search");
-// Route::get('/filter',[SeminarController::class, 'filterSeminar'])->name("filter");
-// Route::post('checkAdd',[SeminarController::class, 'addSeminar'])->name("addSeminar");
+//khiem - seminar
+Route::get('/seminar', [SeminarController::class, 'loadData'])->name("homeSerminar");
+Route::get('/checkDelete',[SeminarController::class, 'deleteSeminar'])->name("deleteSeminar");
+Route::post('deleteAll',[SeminarController::class, 'deleteAllSeminar'])->name("deleteAll");
+Route::get('EditSer/{id}',[SeminarController::class, 'editSeminar'])->name("editSeminar");
+Route::post('updateSer/{id}',[SeminarController::class, 'updateSeminar'])->name("updateSeminar");
+Route::get('/search',[SeminarController::class, 'searchSeminar'])->name("searchSerminar");
+Route::get('/filter',[SeminarController::class, 'filterSeminar'])->name("filterSerminar");
+Route::post('checkAdd',[SeminarController::class, 'addSeminar'])->name("addSeminar");
 
 Route::get('/', function() {
     return view('dashboard');
 });
 
-Route::get('/seminar',[SeminarController::class, 'index']); // ebs
-Route::get('/seminar',[SeminarController::class, 'create']);
 
-Route::get('/essay',[EssayController::class, 'index']);

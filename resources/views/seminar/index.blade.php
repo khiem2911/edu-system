@@ -1,61 +1,264 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="d-flex align-items-center mt-4">
-        <div>
-            <h1>Seminar List</h1>
-        </div>
-        <div class="ms-auto">
-            <a href="" class="btn btn-primary">Add New</a>
-        </div>
-    </div>
-    <div class="mt-4">
-        <div class="d-flex align-items-center mt-4">
-            <div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Action
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Delete</a></li>
-                    </ul>
-                </div>
+<div id="content-wrapper" class="d-flex flex-column">
+  <!-- Main Content -->
+      <div class="container-fluid">
+          <div class="d-flex align-items-center justify-content-between">
+              <h1 class="mb-0">
+                 List Seminars
+              </h1>
+            <div class="mb-0 ">
+              <form action="">
+                  <div class="select-container">
+                      <select  id="filterser">
+                          <option>ALL</option>
+                          @foreach (\App\Constants\GlobalConstants::LIST as $item)
+                          <option>{{$item}}</option>
+                          @endforeach
+                      </select>
+                  </div>
+              </form>
             </div>
-            <div class="ms-auto">
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          </div>
+         
+          <form method="post" action="{{url('deleteAll')}}">
+              {{ csrf_field() }}
+    <div class="d-flex align-items-center justify-content-between">
+              <h1 class="mb-0">
+                  <button onclick="return confirm('are you sure you want to delete all ')"  type="submit" class="btn btn-danger m-o">
+                      Delete All
+                     </button>
+              </h1>
+              <button type="button" id="myBtn"  class="btn btn-primary">
+                 Add Seminar
+                </button>
+    </div>
+    <hr/>
+    <div id="item-lists">
+    @include('seminar.data')
+  </div>
+</form>
+</div>
+</div>
+@include('sweetalert::alert')
+<!-- Modal -->
+
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Add seminar</h5>
+    <button type="button" id="closeModalBtn" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form id="comment" action="" method="post">
+          {{ csrf_field() }}
+          <div class="form-floating mb-3">
+              <input id="name" value="<?php echo(old("name")); ?>" type="text" class="form-control" name="name" id="floatingInput" placeholder="Nhập tên hội nghị">
+              <label for="floatingInput">Name Seminar</label>
             </div>
-        </div>
-        
-    </div>
-    <div class="mt-4">
-        <table class="table table-striped">
-            <thead class="table-light">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-    </div>
+            <div class="form-floating mb-3">
+              <input id="contents" value="<?php echo(old("content")); ?>" type="text" class="form-control" name="content" id="floatingInput" placeholder="Nhập nội dung hội nghị">
+              <label for="floatingInput">Content Seminar</label>
+            </div>
+           
+          <br>    
+          <h3><b>Time start</b> </h3>
+          <input id="timeStart" name="timestart" type="datetime-local" value="<?php echo(old("timestart")); ?>" />
+          <br>
+          <h3><b>Time end</b></h3>
+          <input id="timeEnd" name="timeend" type="datetime-local" value="<?php echo(old("timeend")); ?>" />
+          <br>
+          <button id="testbtn" type="submit" class="btn btn-primary">Save changes</button>
+      </form>
+  </div>
+</div>
+</div>
+</div>
 @endsection
+    @section('js')
+    <script type="text/javascript"> 
+      $(document).ready(function(){
+    $("#myBtn").click(function(){
+    $("#myModal").modal("show");
+    })
+    $("#closeModalBtn").click(function(){
+    $("#myModal").modal("hide");
+    })  
+    $( '#comment' ).on( 'submit', function(e) {
+      e.preventDefault();
+      $("#myModal").modal("hide");
+      var name = $('#name').val();
+      var content = $('#contents').val();
+      var timestart = $('#timeStart').val();
+      var timeend = $('#timeEnd').val();
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+      });
+      $.ajax({
+          method:"POST",
+          url:"/checkAdd",
+          data:{
+              'name':name,
+              'content':content,
+              'timestart':timestart,
+              'timeend':timeend
+          }
+              ,
+          success:function(data)
+          {
+                  Swal.fire({
+                  type: 'success',
+    title: 'Nofication',
+    text: 'Added Successed',
+    }),
+          $('#item-lists').html(data.html);
+          },
+          error: (error) => {
+              console.log(error);
+    }
+    });
+    });
+    $(document).on('click','#deletebtn',function(event){
+    event.preventDefault();
+    var id = $(this).data("id");
+    Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+         if(result.value==true)
+         {
+          $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+      });
+      $.ajax({
+          method:"GET",
+          url:"{{route('deleteSeminar')}}",
+          data:{
+              'id':id,
+          }
+              ,
+          success:function(data)
+          {
+              Swal.fire(
+    'Deleted!',
+    'Your file has been deleted.',
+    'success'
+    )
+    $('#item-lists').html(data.html);
+          }, 
+          error: (error) => {
+              console.log(error);
+    }
+      })
+         }
+      })
+    });
+    $(document).on('click', '.pagination a',function(event)
+    {
+      event.preventDefault();
+      var myurl = $(this).attr('href');
+      var page=$(this).attr('href').split('page=')[1];
+      getData(page);
+    });
+    $('#filterser').on('change',function(){
+      var select =$("#filterser option:selected").val();
+      console.log(select);
+      if(select)
+      {
+          if(select=="ALL")
+          {
+              $('.alldata').show();
+              $('.searchdata').hide();
+          }else
+          {
+              $('.alldata').hide();
+              $('.searchdata').show();
+          }
+        
+      }
+    
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+      });
+      $.ajax({
+          method:"GET",
+          url:"{{ route('filterSerminar') }}",
+          data:{
+              'select':select,
+          }
+              ,
+          success:function(data)
+          {
+              $('.searchdata').html(data);
+          }, 
+          error: (error) => {
+    }
+      })
+    });
+    
+    function getData(page){
+    $.ajax({
+      url: '?page=' + page,
+      type: "get",
+      datatype: "html",
+    })
+    .done(function(data){
+      $("#item-lists").empty().html(data);
+      location.hash = page;
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError){
+    alert('No response from server');
+    });
+    }
+    $(document).on('keyup','#search',function () {
+      $value=$(this).val();
+      if($value)
+      {
+          $('.alldata').hide();
+          $('.searchdata').show();
+      }else{
+          $('.alldata').show();
+          $('.searchdata').hide();
+      }
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+      });
+      $.ajax({
+          method:"GET",
+          url:"{{ route('searchSerminar') }}",
+          data:{
+              'search':$value,
+          }
+              ,
+          success:function(data)
+          {
+              console.log(data);
+              $('.searchdata').html(data);
+          }, 
+          error: (error) => {
+                   console.log(JSON.stringify(error));
+    }
+      })
+    }
+    )
+    })
+    
+        </script>
+    @endsection
