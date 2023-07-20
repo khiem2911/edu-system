@@ -3,10 +3,13 @@
 @section('content')
 <div id="content-wrapper" class="d-flex flex-column">
   <!-- Main Content -->
-  <div class="container">
     <div class="search">
-        <input type="search" name="search" id="search" placeholder="Search seminar here" class="form-control" >
-    </div>
+      <nav class="navbar ">
+        <div class="container-fluid">
+          <div class="d-flex ms-auto" role="search">
+            <input type="search"  name="search" id="search" placeholder="Search seminar here" class="form-control me-2" >
+        </div>
+      </nav>
 </div>
       <div class="container-fluid">
           <div class="d-flex align-items-center justify-content-between">
@@ -31,13 +34,14 @@
               {{ csrf_field() }}
     <div class="d-flex align-items-center justify-content-between">
               <h1 class="mb-0">
-                  <button onclick="return confirm('are you sure you want to delete all ')"  type="submit" class="btn btn-danger m-o">
+                  <button disabled id="deleteAllBtn" onclick="return confirm('are you sure you want to delete all ')"  type="submit" class="btn btn-danger m-o">
                       Delete All
                      </button>
               </h1>
               <button type="button" id="myBtn"  class="btn btn-primary">
                  Add Seminar
                 </button>
+               
     </div>
     <hr/>
     <div id="item-lists">
@@ -63,18 +67,23 @@
           {{ csrf_field() }}
           <div class="form-floating mb-3">
               <input id="name" value="<?php echo(old("name")); ?>" type="text" class="form-control" name="name" id="floatingInput" placeholder="Nhập tên hội nghị">
-              <label for="floatingInput">Name Seminar</label>
+              <label id="labelName" for="floatingInput">Name Seminar</label>
             </div>
             <div class="form-floating mb-3">
-              <input id="contents" value="<?php echo(old("content")); ?>" type="text" class="form-control" name="content" id="floatingInput" placeholder="Nhập nội dung hội nghị">
-              <label for="floatingInput">Content Seminar</label>
+              <input  id="contents" value="<?php echo(old("content")); ?>" type="text" class="form-control" name="content" id="floatingInput" placeholder="Nhập nội dung hội nghị">
+              <label id="labelContent" for="floatingInput">Content Seminar</label>
             </div>
            
           <br>    
-          <h3><b>Time start</b> </h3>
+          <div class="d-flex justify-content-center">
+            <div id="loading" class="spinner-border hidden" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <h3><b id="labelTimeStart">Time start</b> </h3>
           <input id="timeStart" name="timestart" type="datetime-local" value="<?php echo(old("timestart")); ?>" />
           <br>
-          <h3><b>Time end</b></h3>
+          <h3><b id="labelTimeEnd">Time end</b></h3>
           <input id="timeEnd" name="timeend" type="datetime-local" value="<?php echo(old("timeend")); ?>" />
           <br>
           <button id="testbtn" type="submit" class="btn btn-primary">Save changes</button>
@@ -87,6 +96,27 @@
     @section('js')
     <script type="text/javascript"> 
       $(document).ready(function(){
+        $('#select-all').click(function(event) {   
+          $('#deleteAllBtn').removeAttr('disabled');
+    if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;                        
+        });
+    } else {
+      $('#deleteAllBtn').attr('disabled','disabled');
+        $(':checkbox').each(function() {
+            this.checked = false;                       
+        });
+    }
+});
+$(document).on('click','#checkItem',function(event){
+  if(this.checked) {
+      $('#deleteAllBtn').removeAttr('disabled');
+    } else {
+      $('#deleteAllBtn').attr('disabled','disabled');
+    }
+})
     $("#myBtn").click(function(){
     $("#myModal").modal("show");
     })
@@ -95,7 +125,19 @@
     })  
     $( '#comment' ).on( 'submit', function(e) {
       e.preventDefault();
-      $("#myModal").modal("hide");
+      let loader = document.querySelector('#loading')
+      loader.style.display = 'block';
+  loader.classList.remove('hidden');
+  setTimeout(() => loader.style.display = 'none', 1000);
+      $('#name').attr('hidden','hidden');
+      $('#labelName').attr('hidden','hidden');
+      $('#testbtn').attr('hidden','hidden');
+      $('#contents').attr('hidden','hidden');
+      $('#labelContent').attr('hidden','hidden');
+      $('#timeStart').attr('hidden','hidden');
+      $('#labelTimeStart').attr('hidden','hidden');
+      $('#timeEnd').attr('hidden','hidden');
+      $('#labelTimeEnd').attr('hidden','hidden');
       var name = $('#name').val();
       var content = $('#contents').val();
       var timestart = $('#timeStart').val();
@@ -117,6 +159,16 @@
               ,
           success:function(data)
           {
+            $('#name').removeAttr('hidden');
+      $('#labelName').removeAttr('hidden');
+      $('#testbtn').removeAttr('hidden');
+      $('#contents').removeAttr('hidden');
+      $('#labelContent').removeAttr('hidden');
+      $('#timeStart').removeAttr('hidden');
+      $('#labelTimeStart').removeAttr('hidden');
+      $('#timeEnd').removeAttr('hidden');
+      $('#labelTimeEnd').removeAttr('hidden');
+            $("#myModal").modal("hide");
                   Swal.fire({
                   type: 'success',
     title: 'Nofication',
@@ -176,6 +228,8 @@
       event.preventDefault();
       var myurl = $(this).attr('href');
       var page=$(this).attr('href').split('page=')[1];
+     
+      
       getData(page);
     });
     $('#filterser').on('change',function(){
