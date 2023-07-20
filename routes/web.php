@@ -26,4 +26,5 @@ Route::get('/', function() {
 });
 
 Route::get('/seminar',[SeminarController::class, 'index']);
+Route::get('/essay',[EssayController::class, 'index']);
 
