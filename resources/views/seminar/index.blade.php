@@ -96,10 +96,10 @@
     @section('js')
     <script type="text/javascript"> 
       $(document).ready(function(){
-        $('#select-all').click(function(event) {   
-          $('#deleteAllBtn').removeAttr('disabled');
-    if(this.checked) {
-        // Iterate each checkbox
+       
+$(document).on('click','#select-all',function(event){
+  if(this.checked) {
+    $('#deleteAllBtn').removeAttr('disabled');
         $(':checkbox').each(function() {
             this.checked = true;                        
         });
@@ -109,7 +109,7 @@
             this.checked = false;                       
         });
     }
-});
+})
 $(document).on('click','#checkItem',function(event){
   if(this.checked) {
       $('#deleteAllBtn').removeAttr('disabled');
