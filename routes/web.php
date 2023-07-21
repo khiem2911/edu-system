@@ -21,6 +21,7 @@ Route::post('updateSer/{id}',[SeminarController::class, 'updateSeminar'])->name(
 Route::get('/search',[SeminarController::class, 'searchSeminar'])->name("searchSerminar");
 Route::get('/filter',[SeminarController::class, 'filterSeminar'])->name("filterSerminar");
 Route::post('checkAdd',[SeminarController::class, 'addSeminar'])->name("addSeminar");
+Route::get('/seminar/sort_seminar',[SeminarController::class, 'sortSeminar'])->name("sortSerminar");
 
 Route::get('/', function() {
     return view('dashboard');
