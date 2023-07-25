@@ -7,7 +7,7 @@
             <nav class="navbar ">
                 <div class="container-fluid">
                     <div class="d-flex ms-auto" role="search">
-                        <input type="search" name="search" id="search" placeholder="Search seminar name"
+                        <input type="search" name="search" id="search" placeholder="Search name"
                             class="form-control me-2">
                     </div>
             </nav>
@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <div class="d-flex align-items-center justify-content-between">
                 <h1 class="mb-0">
-                    List Seminars
+                    List Certipicate
                 </h1>
                 <div class="mb-0 ">
                     <form action="">
@@ -41,13 +41,13 @@
                         </button>
                     </h1>
                     <button type="button" id="myBtn" class="btn btn-primary">
-                        Add Seminar
+                        Add Certipicate
                     </button>
 
                 </div>
                 <hr />
                 <div id="item-lists">
-                    @include('seminar.data')
+                    @include('certipicate.data')
                 </div>
             </form>
         </div>
@@ -59,7 +59,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add seminar</h5>
+                    <h5 class="modal-title">Add Certipicate</h5>
                     <button type="button" id="closeModalBtn" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -70,12 +70,12 @@
                         <div class="form-floating mb-3">
                             <input id="name" value="<?php echo old('name'); ?>" type="text" class="form-control"
                                 name="name" id="floatingInput" required >
-                            <label  id="labelName" for="floatingInput">Name Seminar</label>
+                            <label  id="labelName" for="floatingInput">Name</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input id="contents" value="<?php echo old('content'); ?>" type="text" class="form-control"
-                                name="content" id="floatingInput" required >
-                            <label id="labelContent" for="floatingInput">Content Seminar</label>
+                            <input id="address" value="<?php echo old('address'); ?>" type="text" class="form-control"
+                                name="address" id="floatingInput" required >
+                            <label id="labelAddress" for="floatingInput">Address</label>
                         </div>
 
                         <br>
@@ -84,12 +84,20 @@
                                 <span class="sr-only">Loading...</span>
                             </div>
                         </div>
-                        <h3><b id="labelTimeStart">Time start</b> </h3>
-                        <input required id="timeStart" name="timestart" type="datetime-local" value="<?php echo old('timestart'); ?>" />
+                        <h3><b id="labelDateOfBirth">Date of bidth</b> </h3>
+                        <input required id="dateofbirth" name="dateofbirth" type="datetime-local" value="<?php echo old('dateofbirth'); ?>" />
                         <br>
-                        <h3><b id="labelTimeEnd">Time end</b></h3>
-                        <input required id="timeEnd" name="timeend" type="datetime-local" value="<?php echo old('timeend'); ?>" />
-                        <br>
+                        <div class="form-floating mb-3">
+                            <input id="phone" value="<?php echo old('phone'); ?>" type="text" class="form-control"
+                                name="phone" id="floatingInput" required >
+                            <label id="labelPhone" for="floatingInput">Phone</label>
+                        </div><br>
+                        <div class="form-floating mb-3">
+                            <input id="email" value="<?php echo old('email'); ?>" type="text" class="form-control"
+                                name="email" id="floatingInput" required >
+                            <label id="labelEmail" for="floatingInput">Email</label>
+                        </div>
+                       
                         <button id="testbtn" type="submit" class="btn btn-primary">Save changes</button>
                     </form>
                 </div>
@@ -130,14 +138,14 @@
 
             function fetch_data(sort_type = '', column_name = '') {
                 $.ajax({
-                    url: '/seminar/sort_seminar?sortby=' + sort_type + "&columnName=" + column_name,
+                    url: '/certipicate/sort_certipicate?sortby=' + sort_type + "&columnName=" + column_name,
                     success: function(data) {
                         $('.alldata').empty();
                         $('.alldata').html(data);
                     }
                 })
             }
-            $(document).on('click', '.seminar_sorting', function() {
+            $(document).on('click', '.certipicate_sorting', function() {
                 var column_name = $(this).data('column_name');
                 var sort_type = $(this).data('sorting_type');
                 var reverse_order = '';
@@ -165,16 +173,20 @@
                 $('#name').attr('hidden', 'hidden');
                 $('#labelName').attr('hidden', 'hidden');
                 $('#testbtn').attr('hidden', 'hidden');
-                $('#contents').attr('hidden', 'hidden');
-                $('#labelContent').attr('hidden', 'hidden');
-                $('#timeStart').attr('hidden', 'hidden');
-                $('#labelTimeStart').attr('hidden', 'hidden');
-                $('#timeEnd').attr('hidden', 'hidden');
-                $('#labelTimeEnd').attr('hidden', 'hidden');
+                $('#address').attr('hidden', 'hidden');
+                $('#labelAddress').attr('hidden', 'hidden');
+                $('#dateofbirth').attr('hidden', 'hidden');
+                $('#labelDateOfBirth').attr('hidden', 'hidden');
+                $('#phone').attr('hidden', 'hidden');
+                $('#labelPhone').attr('hidden', 'hidden');
+                $('#email').attr('hidden', 'hidden');
+                $('#labelEmail').attr('hidden', 'hidden');
                 var name = $('#name').val();
-                var content = $('#contents').val();
-                var timestart = $('#timeStart').val();
-                var timeend = $('#timeEnd').val();
+                var address = $('#address').val();
+                var dateofbidth = $('#dateofbidth').val();
+                var phone = $('#phone').val();
+                var email = $('#email').val();
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -185,20 +197,23 @@
                     url: "/checkAdd",
                     data: {
                         'name': name,
-                        'content': content,
-                        'timestart': timestart,
-                        'timeend': timeend
+                        'address': address,
+                        'dateofbidth': dateofbidth,
+                        'phone': phone,
+                        'email': email
                     },
                     success: function(data) {
                         $('#name').removeAttr('hidden');
                         $('#labelName').removeAttr('hidden');
                         $('#testbtn').removeAttr('hidden');
-                        $('#contents').removeAttr('hidden');
-                        $('#labelContent').removeAttr('hidden');
-                        $('#timeStart').removeAttr('hidden');
-                        $('#labelTimeStart').removeAttr('hidden');
-                        $('#timeEnd').removeAttr('hidden');
-                        $('#labelTimeEnd').removeAttr('hidden');
+                        $('#address').removeAttr('hidden');
+                        $('#labeladdress').removeAttr('hidden');
+                        $('#dateofbirth').removeAttr('hidden');
+                        $('#labelDateOfBirth').removeAttr('hidden');
+                        $('#phone').removeAttr('hidden');
+                        $('#labelPhone').removeAttr('hidden');
+                        $('#email').removeAttr('hidden');
+                        $('#labelPhone').removeAttr('hidden');
                         $("#myModal").modal("hide");
                         setTimeout(() =>  Swal.fire({
                                 type: 'success',
@@ -232,7 +247,7 @@
                         });
                         $.ajax({
                             method: "GET",
-                            url: "{{ route('deleteSeminar') }}",
+                            url: "{{ route('DeleteCertipicate') }}",
                             data: {
                                 'id': id,
                             },
@@ -277,7 +292,7 @@
                 });
                 $.ajax({
                     method: "GET",
-                    url: "{{ route('filterSerminar') }}",
+                    url: "{{ route('filterCertipicate') }}",
                     data: {
                         'select': select,
                     },
@@ -318,7 +333,7 @@
                 });
                 $.ajax({
                     method: "GET",
-                    url: "{{ route('searchSerminar') }}",
+                    url: "{{ route('searchCertipicate') }}",
                     data: {
                         'search': $value,
                     },

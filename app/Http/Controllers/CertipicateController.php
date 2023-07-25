@@ -6,96 +6,98 @@ use Illuminate\Http\Request;
 use DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Exception;
-class SeminarController extends Controller
+class CertipicateController extends Controller
 {
-    public function deleteAllSeminar(Request $request)
+    public function deleteAllCertipicate(Request $request)
     {
         $id = $request->checkbox;
         $alert;
         if ($id == null) {
-            $count = DB::table('Seminar')->count();
+            $count = DB::table('card_activation')->count();
             if ($count == 0) {
                 $alert = alert()->warning('Nothing to delete');
-                return redirect()->route('homeSerminar', ['alert' => $alert]);
+                return redirect()->route('homeCertipicate', ['alert' => $alert]);
             } else {
-                DB::table('Seminar')->delete();
+                DB::table('card_activation')->delete();
                 $alert = alert()->success('Delete Successed');
-                return redirect()->route('homeSerminar', ['alert' => $alert]);
+                return redirect()->route('homeCertipicate', ['alert' => $alert]);
             }
             $alert = alert()->warning('Please select at least 1 to delete');
-            return redirect()->route('homeSerminar', ['alert' => $alert]);
+            return redirect()->route('homeCertipicate', ['alert' => $alert]);
         } else {
             foreach ($id as $item) {
-                $deleted = DB::table('Seminar')
+                $deleted = DB::table('card_activation')
                     ->where('id', '=', $item)
                     ->delete();
             }
             if ($deleted) {
                 alert()->success('Delete Successed');
-                return redirect()->route('homeSerminar');
+                return redirect()->route('homeCertipicate');
             }
         }
     }
-    public function addSeminar(Request $request)
+    public function addCertipicate(Request $request)
     {
         $name = $request->name;
-        $content = $request->content;
-        $timestart = $request->timestart;
-        $timeend = $request->timeend;
+        $address = $request->address;
+        $dateofbirth = $request->dateofbirth;
+        $phone = $request->phone;
+        $email = $request->email;
         $query = false;
 
         $request->session()->flush();
-        $values = ['name' => $name, 'content' => $content, 'timestart' => $timestart, 'timeend' => $timeend];
+        $values = ['name' => $name, 'address' => $address, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'email' => $email];
         $request->session()->reflash();
-        $query = DB::table('Seminar')->insert($values);
-        $data = DB::table('Seminar')->paginate(5);
-        $html = view('seminar.data', compact('data'))->render();
+        $query = DB::table('card_activation')->insert($values);
+        $data = DB::table('card_activation')->paginate(5);
+        $html = view('certipicate.data', compact('data'))->render();
         return response()->json([
             'status' => true,
             'html' => $html,
         ]);
     }
-    public function deleteSeminar(Request $request)
+    public function deleteCertipicate(Request $request)
     {
-        $deleted = DB::table('Seminar')
+        $deleted = DB::table('Card_activation')
             ->where('id', '=', $request->id)
             ->delete();
-        $data = DB::table('Seminar')->paginate(5);
-        $html = view('seminar.data', compact('data'))->render();
+        $data = DB::table('Card_activation')->paginate(5);
+        $html = view('certipicate.data', compact('data'))->render();
         return response()->json([
             'status' => true,
             'html' => $html,
         ]);
     }
-    public function updateSeminar(Request $request, $id)
+    public function updateCertipicate(Request $request, $id)
     {
         $name = $request->name;
-        $content = $request->content;
-        $timestart = $request->timestart;
-        $timeend = $request->timeend;
-        $values = ['name' => $name, 'content' => $content, 'timestart' => $timestart, 'timeend' => $timeend];
-        $query = DB::table('Seminar')
+        $address = $request->address;
+        $dateofbirth = $request->dateofbirth;
+        $phone = $request->phone;
+        $email = $request->email;
+        $values = ['name' => $name, 'address' => $address, 'dateofbirth' => $dateofbirth, 'phone' => $phone, 'email' => $email];
+        $query = DB::table('card_activation')
             ->where('id', '=', $id)
             ->update($values);
         if ($query) {
             alert()->success('Update Successed');
         }
-        return redirect()->route('homeSerminar');
+        return redirect()->route('homeCertipicate');
     }
-    public function editSeminar($id)
+    public function editCertipicate($id)
     {
-        $data = DB::select('select * from Seminar where id = ?', [$id]);
+        $data = DB::select('select * from card_activation where id = ?', [$id]);
         if ($data) {
-            return view('seminar.update')->with('data', $data[0]);
+            return view('certipicate.update')->with('data', $data[0]);
         }
     }
-    public function filterSeminar(Request $request)
+    public function filterCertipicate(Request $request)
     {
         $select = $request->select;
         $output = '';
         if ($select) {
             if ($select == 'Theo thứ tự giảm dần') {
-                $data = DB::table('Seminar')
+                $data = DB::table('card_activation')
                     ->orderBy('id', 'DESC')
                     ->paginate(5);
                 $output = '';
@@ -114,13 +116,16 @@ class SeminarController extends Controller
                         $item->name .
                         ' </td>
                     <td class="align-middle"> ' .
-                        $item->content .
+                        $item->address .
                         ' </td>
                     <td class="align-middle"> ' .
-                        $item->timestart .
+                        $item->dateofbirth .
                         ' </td>
                     <td class="align-middle"> ' .
-                        $item->timeend .
+                        $item->phone .
+                        ' </td>
+                        <td class="align-middle"> ' .
+                        $item->email .
                         ' </td>
                     <td class="align-middle">
                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -138,7 +143,7 @@ class SeminarController extends Controller
                 return response($output);
             }
             if ($select == 'A tới Z') {
-                $data = DB::table('Seminar')
+                $data = DB::table('card_activation')
                     ->orderBy('name', 'ASC')
                     ->paginate(5);
                 $output = '';
@@ -157,13 +162,16 @@ class SeminarController extends Controller
                         $item->name .
                         ' </td>
                     <td class="align-middle"> ' .
-                        $item->content .
+                        $item->address .
                         ' </td>
                     <td class="align-middle"> ' .
-                        $item->timestart .
+                        $item->dateofbirth .
                         ' </td>
                     <td class="align-middle"> ' .
-                        $item->timeend .
+                        $item->phone .
+                        ' </td>
+                        <td class="align-middle"> ' .
+                        $item->email .
                         ' </td>
                     <td class="align-middle">
                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -182,9 +190,9 @@ class SeminarController extends Controller
             }
         }
     }
-    public function searchSeminar(Request $request)
+    public function searchCertipicate(Request $request)
     {
-        $data = DB::table('Seminar')
+        $data = DB::table('card_activation')
             ->where('name', 'like', '%' . $request->search . '%')
             ->paginate(5);
         $output = '';
@@ -203,13 +211,16 @@ class SeminarController extends Controller
                 $item->name .
                 ' </td>
             <td class="align-middle"> ' .
-                $item->content .
+                $item->address .
                 ' </td>
             <td class="align-middle"> ' .
-                $item->timestart .
+                $item->dateofbirth .
                 ' </td>
             <td class="align-middle"> ' .
-                $item->timeend .
+                $item->phone .
+                ' </td>
+                <td class="align-middle"> ' .
+                $item->email .
                 ' </td>
             <td class="align-middle">
             <div class="btn-group" role="group" aria-label="Basic example">
@@ -226,12 +237,12 @@ class SeminarController extends Controller
         }
         return response($output);
     }
-    public function sortSeminar(Request $request)
+    public function sortCertipicate(Request $request)
     {
         if ($request->ajax()) {
             $sortType = $request->sortby;
             $sortBy = $request->columnName;
-            $data = DB::table('Seminar')
+            $data = DB::table('card_activation')
                 ->orderBy($sortBy, $sortType)
                 ->paginate(5);
             $output = '';
@@ -250,13 +261,16 @@ class SeminarController extends Controller
                     $item->name .
                     ' </td>
             <td class="align-middle"> ' .
-                    $item->content .
+                    $item->address .
                     ' </td>
             <td class="align-middle"> ' .
-                    $item->timestart .
+                    $item->dateofbirth .
                     ' </td>
             <td class="align-middle"> ' .
-                    $item->timeend .
+                    $item->phone .
+                    ' </td>
+                    <td class="align-middle"> ' .
+                    $item->email .
                     ' </td>
             <td class="align-middle">
             <div class="btn-group" role="group" aria-label="Basic example">
@@ -276,10 +290,10 @@ class SeminarController extends Controller
     }
     public function loadData(Request $request)
     {
-        $data = DB::table('Seminar')->paginate(5);
+        $data = DB::table('card_activation')->paginate(5);
         if ($request->ajax()) {
-            return view('seminar.data', compact('data'));
+            return view('certipicate.data', compact('data'));
         }
-        return view('seminar.index', compact('data'));
+        return view('certipicate.index', compact('data'));
     }
 }
