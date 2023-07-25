@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeminarController;
+use App\Http\Controllers\IntroducingLetterController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +29,15 @@ Route::get('/', function() {
 });
 
 
+Route::get('/introducing', [IntroducingLetterController::class, 'loadData'])->name("homeIntroducing");
+Route::get('/checkDelete',[IntroducingLetterController::class, 'deleteIntroducing'])->name("deleteIntroducing");
+Route::post('deleteAll',[IntroducingLetterController::class, 'deleteAllIntroducing'])->name("deleteAll");
+Route::get('EditSer/{id}',[IntroducingLetterController::class, 'editIntroducing'])->name("editIntroducing");
+Route::post('updateSer/{id}',[IntroducingLetterController::class, 'updateIntroducing'])->name("updateIntroducing");
+Route::get('/search',[IntroducingLetterController::class, 'searchIntroducing'])->name("searchIntroducing");
+Route::get('/filter',[IntroducingLetterController::class, 'filterIntroducing'])->name("filterIntroducing");
+Route::post('checkAdd',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");
+
+Route::get('/', function() {
+    return view('dashboard');
+});
