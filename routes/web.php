@@ -2,8 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeminarController;
+<<<<<<< HEAD
 use App\Http\Controllers\EssayController;
 use App\Http\Controllers\CertipicateController;
+=======
+use App\Http\Controllers\IntroducingLetterController;
+>>>>>>> 0f5bcd2ec1261464d16772c6b76aca5d6f3be4d3
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +35,7 @@ Route::get('/', function() {
 });
 
 
+<<<<<<< HEAD
 //điền
 Route::get('/essay', [EssayController::class, 'loadData'])->name("homeEssay");
 Route::get('/Delete',[EssayController::class, 'DeleteEssay'])->name("DeleteEssay");
@@ -53,3 +58,17 @@ Route::get('filterCertipicate',[CertipicateController::class, 'filterCertipicate
 Route::get('/searchCertipicate',[CertipicateController::class, 'searchCertipicate'])->name("searchCertipicate");
 Route::get('checkAdd',[CertipicateController::class, 'addCertipicate'])->name("addCertipicate");
 Route::get('/certipicate/sort_certipicate',[CertipicateController::class, 'sortCertipicate'])->name("sortCertipicate");
+=======
+Route::get('/introducing', [IntroducingLetterController::class, 'loadData'])->name("homeIntroducing");
+Route::get('/checkDelete',[IntroducingLetterController::class, 'deleteIntroducing'])->name("deleteIntroducing");
+Route::post('deleteAll',[IntroducingLetterController::class, 'deleteAllIntroducing'])->name("deleteAll");
+Route::get('EditSer/{id}',[IntroducingLetterController::class, 'editIntroducing'])->name("editIntroducing");
+Route::post('updateSer/{id}',[IntroducingLetterController::class, 'updateIntroducing'])->name("updateIntroducing");
+Route::get('/search',[IntroducingLetterController::class, 'searchIntroducing'])->name("searchIntroducing");
+Route::get('/filter',[IntroducingLetterController::class, 'filterIntroducing'])->name("filterIntroducing");
+Route::post('checkAdd',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");
+
+Route::get('/', function() {
+    return view('dashboard');
+});
+>>>>>>> 0f5bcd2ec1261464d16772c6b76aca5d6f3be4d3

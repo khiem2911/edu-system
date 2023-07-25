@@ -637,6 +637,7 @@
                     </svg>
                 </button>
             </li>
+<<<<<<< HEAD
             <li class="nav-item text-nowrap">
                 <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
@@ -685,6 +686,21 @@
                                 </a>
                             </li>
                         </ul>
+=======
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                  <svg class="bi"><use xlink:href="#file-earmark"/></svg>
+                  Essay
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                  <svg class="bi"><use xlink:href="#file-earmark"/></svg>
+                  Introducing-Letter
+                </a>
+              </li>
+          </ul>
+>>>>>>> 0f5bcd2ec1261464d16772c6b76aca5d6f3be4d3
 
 
                     </div>
