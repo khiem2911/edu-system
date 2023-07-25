@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeminarController;
+use App\Http\Controllers\EssayController;
+use App\Http\Controllers\CertipicateController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +31,25 @@ Route::get('/', function() {
 });
 
 
+//điền
+Route::get('/essay', [EssayController::class, 'loadData'])->name("homeEssay");
+Route::get('/Delete',[EssayController::class, 'DeleteEssay'])->name("DeleteEssay");
+Route::post('deleteAll',[EssayController::class, 'deleteAllEssay'])->name("deleteAll");
+Route::get('EditEssay/{id}',[EssayController::class, 'editEssay'])->name("editEssay");
+Route::post('updateEssay/{id}',[EssayController::class, 'updateEssay'])->name("updateEssay");
+Route::get('filterEssay',[EssayController::class, 'filterEssay'])->name("filterEssay");
+Route::get('/searchEssay',[EssayController::class, 'searchEssay'])->name("searchEssay");
+Route::get('checkAdd',[EssayController::class, 'addEssay'])->name("addEssay");
+Route::get('/essay/sort_essay',[EssayController::class, 'sortEssay'])->name("sortEssay");
+
+
+//oanh
+Route::get('/certipicate', [CertipicateController::class, 'loadData'])->name("homeCertipicate");
+Route::get('/DeleteCertipicate',[CertipicateController::class, 'loadData'])->name("DeleteCertipicate");
+Route::post('deleteAll',[CertipicateController::class, 'deleteAllCertipicate'])->name("deleteAll");
+Route::get('EditCertipicate/{id}',[CertipicateController::class, 'editCertipicate'])->name("editCertipicate");
+Route::post('updateCertipicate/{id}',[CertipicateController::class, 'updateCertipicate'])->name("updateCertipicate");
+Route::get('filterCertipicate',[CertipicateController::class, 'filterCertipicate'])->name("filterCertipicate");
+Route::get('/searchCertipicate',[CertipicateController::class, 'searchCertipicate'])->name("searchCertipicate");
+
+Route::get('/certipicate/sort_certipicate',[CertipicateController::class, 'sortCertipicate'])->name("sortCertipicate");

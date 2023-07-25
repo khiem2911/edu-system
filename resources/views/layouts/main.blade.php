@@ -669,14 +669,21 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="#">
+                                <a class="nav-link d-flex align-items-center gap-2" href="{{ url('/essay') }}">
                                     <svg class="bi">
                                         <use xlink:href="#file-earmark" />
                                     </svg>
                                     Essay
                                 </a>
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2" href="{{ url('/certipicate') }}">
+                                    <svg class="bi">
+                                        <use xlink:href="#file-earmark" />
+                                    </svg>
+                                    Certipicate
+                                </a>
+                            </li>
                         </ul>
 
 
