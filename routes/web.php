@@ -26,6 +26,7 @@ Route::post('checkAdd',[SeminarController::class, 'addSeminar'])->name("addSemin
 Route::get('/', function() {
     return view('dashboard');
 });
+
 //Kiên
 Route::resource('extracurriculars',ExtracurricularController::class);
 Route::delete('/selected-extras', [ExtracurricularController::class, 'deleteAll'])->name('extracurriculars.delete');
