@@ -51,5 +51,5 @@ Route::get('EditCertipicate/{id}',[CertipicateController::class, 'editCertipicat
 Route::post('updateCertipicate/{id}',[CertipicateController::class, 'updateCertipicate'])->name("updateCertipicate");
 Route::get('filterCertipicate',[CertipicateController::class, 'filterCertipicate'])->name("filterCertipicate");
 Route::get('/searchCertipicate',[CertipicateController::class, 'searchCertipicate'])->name("searchCertipicate");
-
+Route::get('checkAdd',[CertipicateController::class, 'addCertipicate'])->name("addCertipicate");
 Route::get('/certipicate/sort_certipicate',[CertipicateController::class, 'sortCertipicate'])->name("sortCertipicate");
