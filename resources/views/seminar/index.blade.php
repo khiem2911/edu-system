@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <form method="post" action="{{ url('deleteAll') }}">
+            <form method="post" action="{{ route("deleteAll") }}">
                 {{ csrf_field() }}
                 <div class="d-flex align-items-center justify-content-between">
                     <h1 class="mb-0">

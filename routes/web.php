@@ -2,17 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SeminarController;
-<<<<<<< HEAD
 use App\Http\Controllers\ExtracurricularController;
-=======
-<<<<<<< HEAD
 use App\Http\Controllers\EssayController;
 use App\Http\Controllers\CertipicateController;
-=======
 use App\Http\Controllers\IntroducingLetterController;
->>>>>>> 0f5bcd2ec1261464d16772c6b76aca5d6f3be4d3
 
->>>>>>> c5f0101bc636bdc232c62eee42a5228ba3c25fe2
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +18,7 @@ use App\Http\Controllers\IntroducingLetterController;
 |
 */
 //khiem - seminar
+
 Route::get('/seminar', [SeminarController::class, 'loadData'])->name("homeSerminar");
 Route::get('/checkDelete',[SeminarController::class, 'deleteSeminar'])->name("deleteSeminar");
 Route::post('deleteAll',[SeminarController::class, 'deleteAllSeminar'])->name("deleteAll");
@@ -31,7 +26,7 @@ Route::get('EditSer/{id}',[SeminarController::class, 'editSeminar'])->name("edit
 Route::post('updateSer/{id}',[SeminarController::class, 'updateSeminar'])->name("updateSeminar");
 Route::get('/search',[SeminarController::class, 'searchSeminar'])->name("searchSerminar");
 Route::get('/filter',[SeminarController::class, 'filterSeminar'])->name("filterSerminar");
-Route::post('checkAdd',[SeminarController::class, 'addSeminar'])->name("addSeminar");
+Route::post('checkAddSer',[SeminarController::class, 'addSeminar'])->name("addSeminar");
 Route::get('/seminar/sort_seminar',[SeminarController::class, 'sortSeminar'])->name("sortSerminar");
 Route::get('/seminar/fetch_seminar',[SeminarController::class, 'fetch_seminar']);
 Route::get('/', function() {
@@ -47,11 +42,10 @@ Route::get('/extracurriculars.sort', [ExtracurricularController::class, 'getSort
 
 
 
-<<<<<<< HEAD
 //điền
 Route::get('/essay', [EssayController::class, 'loadData'])->name("homeEssay");
 Route::get('/Delete',[EssayController::class, 'DeleteEssay'])->name("DeleteEssay");
-Route::post('deleteAll',[EssayController::class, 'deleteAllEssay'])->name("deleteAll");
+Route::post('deleteAllEssay',[EssayController::class, 'deleteAllEssay'])->name("deleteAllEssay");
 Route::get('EditEssay/{id}',[EssayController::class, 'editEssay'])->name("editEssay");
 Route::post('updateEssay/{id}',[EssayController::class, 'updateEssay'])->name("updateEssay");
 Route::get('filterEssay',[EssayController::class, 'filterEssay'])->name("filterEssay");
@@ -63,24 +57,22 @@ Route::get('/essay/sort_essay',[EssayController::class, 'sortEssay'])->name("sor
 //oanh
 Route::get('/certipicate', [CertipicateController::class, 'loadData'])->name("homeCertipicate");
 Route::get('/DeleteCertipicate',[CertipicateController::class, 'loadData'])->name("DeleteCertipicate");
-Route::post('deleteAll',[CertipicateController::class, 'deleteAllCertipicate'])->name("deleteAll");
+Route::post('deleteAllCertipicate',[CertipicateController::class, 'deleteAllCertipicate'])->name("deleteAllCertipicate");
 Route::get('EditCertipicate/{id}',[CertipicateController::class, 'editCertipicate'])->name("editCertipicate");
 Route::post('updateCertipicate/{id}',[CertipicateController::class, 'updateCertipicate'])->name("updateCertipicate");
 Route::get('filterCertipicate',[CertipicateController::class, 'filterCertipicate'])->name("filterCertipicate");
 Route::get('/searchCertipicate',[CertipicateController::class, 'searchCertipicate'])->name("searchCertipicate");
 Route::get('checkAdd',[CertipicateController::class, 'addCertipicate'])->name("addCertipicate");
 Route::get('/certipicate/sort_certipicate',[CertipicateController::class, 'sortCertipicate'])->name("sortCertipicate");
-=======
-Route::get('/introducing', [IntroducingLetterController::class, 'loadData'])->name("homeIntroducing");
-Route::get('/checkDelete',[IntroducingLetterController::class, 'deleteIntroducing'])->name("deleteIntroducing");
-Route::post('deleteAll',[IntroducingLetterController::class, 'deleteAllIntroducing'])->name("deleteAll");
-Route::get('EditSer/{id}',[IntroducingLetterController::class, 'editIntroducing'])->name("editIntroducing");
-Route::post('updateSer/{id}',[IntroducingLetterController::class, 'updateIntroducing'])->name("updateIntroducing");
-Route::get('/search',[IntroducingLetterController::class, 'searchIntroducing'])->name("searchIntroducing");
-Route::get('/filter',[IntroducingLetterController::class, 'filterIntroducing'])->name("filterIntroducing");
-Route::post('checkAdd',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");
 
-Route::get('/', function() {
-    return view('dashboard');
-});
->>>>>>> 0f5bcd2ec1261464d16772c6b76aca5d6f3be4d3
+
+//Quốc
+Route::get('/introducing', [IntroducingLetterController::class, 'loadData'])->name("homeIntroducing");
+Route::get('/checkDeleteintroducing',[IntroducingLetterController::class, 'deleteIntroducing'])->name("deleteIntroducing");
+Route::post('deleteAllintroducing',[IntroducingLetterController::class, 'deleteAllIntroducing'])->name("deleteAllintroducing");
+Route::get('EditSerintroducing/{id}',[IntroducingLetterController::class, 'editIntroducing'])->name("editIntroducing");
+Route::post('updateintroducing/{id}',[IntroducingLetterController::class, 'updateIntroducing'])->name("updateIntroducing");
+Route::get('/searchintroducing',[IntroducingLetterController::class, 'searchIntroducing'])->name("searchIntroducing");
+Route::get('/filterintroducing',[IntroducingLetterController::class, 'filterIntroducing'])->name("filterIntroducing");
+Route::post('checkAddintroducing',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");
+

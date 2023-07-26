@@ -13,12 +13,12 @@ class SeminarController extends Controller
         $id = $request->checkbox;
         $alert;
         if ($id == null) {
-            $count = DB::table('Seminar')->count();
+            $count = DB::table('seminar')->count();
             if ($count == 0) {
                 $alert = alert()->warning('Nothing to delete');
                 return redirect()->route('homeSerminar', ['alert' => $alert]);
             } else {
-                DB::table('Seminar')->delete();
+                DB::table('seminar')->delete();
                 $alert = alert()->success('Delete Successed');
                 return redirect()->route('homeSerminar', ['alert' => $alert]);
             }
@@ -26,7 +26,7 @@ class SeminarController extends Controller
             return redirect()->route('homeSerminar', ['alert' => $alert]);
         } else {
             foreach ($id as $item) {
-                $deleted = DB::table('Seminar')
+                $deleted = DB::table('seminar')
                     ->where('id', '=', $item)
                     ->delete();
             }
@@ -42,7 +42,7 @@ class SeminarController extends Controller
         {
             $sort_by = $request->get('sortby');
             $sort_type = $request->get('sorttype');
-            $data = DB::table('Seminar')
+            $data = DB::table('seminar')
                 ->orderBy($sort_by, $sort_type)
                 ->paginate(5);
             return view('seminar.pagination', compact('data'))->render();
@@ -59,8 +59,8 @@ class SeminarController extends Controller
         $request->session()->flush();
         $values = ['name' => $name, 'content' => $content, 'timestart' => $timestart, 'timeend' => $timeend];
         $request->session()->reflash();
-        $query = DB::table('Seminar')->insert($values);
-        $data = DB::table('Seminar')->paginate(5);
+        $query = DB::table('seminar')->insert($values);
+        $data = DB::table('seminar')->paginate(5);
         $html = view('seminar.data', compact('data'))->render();
         return response()->json([
             'status' => true,
@@ -69,10 +69,10 @@ class SeminarController extends Controller
     }
     public function deleteSeminar(Request $request)
     {
-        $deleted = DB::table('Seminar')
+        $deleted = DB::table('seminar')
             ->where('id', '=', $request->id)
             ->delete();
-        $data = DB::table('Seminar')->paginate(5);
+        $data = DB::table('seminar')->paginate(5);
         $html = view('seminar.data', compact('data'))->render();
         return response()->json([
             'status' => true,
@@ -86,7 +86,7 @@ class SeminarController extends Controller
         $timestart = $request->timestart;
         $timeend = $request->timeend;
         $values = ['name' => $name, 'content' => $content, 'timestart' => $timestart, 'timeend' => $timeend];
-        $query = DB::table('Seminar')
+        $query = DB::table('seminar')
             ->where('id', '=', $id)
             ->update($values);
         if ($query) {
@@ -96,7 +96,7 @@ class SeminarController extends Controller
     }
     public function editSeminar($id)
     {
-        $data = DB::select('select * from Seminar where id = ?', [$id]);
+        $data = DB::select('select * from seminar where id = ?', [$id]);
         if ($data) {
             return view('seminar.update')->with('data', $data[0]);
         }
@@ -107,7 +107,7 @@ class SeminarController extends Controller
         $output = '';
         if ($select) {
             if ($select == 'Theo thứ tự giảm dần') {
-                $data = DB::table('Seminar')
+                $data = DB::table('seminar')
                     ->orderBy('id', 'DESC')
                     ->paginate(5);
                 $output = '';
@@ -150,7 +150,7 @@ class SeminarController extends Controller
                 return response($output);
             }
             if ($select == 'A tới Z') {
-                $data = DB::table('Seminar')
+                $data = DB::table('seminar')
                     ->orderBy('name', 'ASC')
                     ->paginate(5);
                 $output = '';
@@ -196,7 +196,7 @@ class SeminarController extends Controller
     }
     public function searchSeminar(Request $request)
     {
-        $data = DB::table('Seminar')
+        $data = DB::table('seminar')
             ->where('name', 'like', '%' . $request->search . '%')
             ->paginate(5);
         $output = '';
@@ -243,7 +243,7 @@ class SeminarController extends Controller
         if ($request->ajax()) {
             $sortType = $request->sortby;
             $sortBy = $request->columnName;
-            $data = DB::table('Seminar')
+            $data = DB::table('seminar')
                 ->orderBy($sortBy, $sortType)
                 ->paginate(5);
             $output = '';
@@ -288,7 +288,7 @@ class SeminarController extends Controller
     }
     public function loadData(Request $request)
     {
-        $data = DB::table('Seminar')
+        $data = DB::table('seminar')
             ->orderBy('id', 'asc')
             ->paginate(5);
         if($request->ajax()){
