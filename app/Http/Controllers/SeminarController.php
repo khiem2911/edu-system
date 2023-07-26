@@ -36,6 +36,18 @@ class SeminarController extends Controller
             }
         }
     }
+    public function fetch_seminar(Request $request)
+    {
+        if($request->ajax())
+        {
+            $sort_by = $request->get('sortby');
+            $sort_type = $request->get('sorttype');
+            $data = DB::table('Seminar')
+                ->orderBy($sort_by, $sort_type)
+                ->paginate(5);
+            return view('seminar.pagination', compact('data'))->render();
+        }
+    }
     public function addSeminar(Request $request)
     {
         $name = $request->name;
@@ -276,8 +288,10 @@ class SeminarController extends Controller
     }
     public function loadData(Request $request)
     {
-        $data = DB::table('Seminar')->paginate(5);
-        if ($request->ajax()) {
+        $data = DB::table('Seminar')
+            ->orderBy('id', 'asc')
+            ->paginate(5);
+        if($request->ajax()){
             return view('seminar.data', compact('data'));
         }
         return view('seminar.index', compact('data'));

@@ -22,7 +22,7 @@ Route::get('/search',[SeminarController::class, 'searchSeminar'])->name("searchS
 Route::get('/filter',[SeminarController::class, 'filterSeminar'])->name("filterSerminar");
 Route::post('checkAdd',[SeminarController::class, 'addSeminar'])->name("addSeminar");
 Route::get('/seminar/sort_seminar',[SeminarController::class, 'sortSeminar'])->name("sortSerminar");
-
+Route::get('/seminar/fetch_seminar',[SeminarController::class, 'fetch_seminar']);
 Route::get('/', function() {
     return view('dashboard');
 });

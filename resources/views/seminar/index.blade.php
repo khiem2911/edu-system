@@ -43,7 +43,6 @@
                     <button type="button" id="myBtn" class="btn btn-primary">
                         Add Seminar
                     </button>
-
                 </div>
                 <hr />
                 <div id="item-lists">
@@ -69,12 +68,12 @@
                         {{ csrf_field() }}
                         <div class="form-floating mb-3">
                             <input id="name" value="<?php echo old('name'); ?>" type="text" class="form-control"
-                                name="name" id="floatingInput" required >
-                            <label  id="labelName" for="floatingInput">Name Seminar</label>
+                                name="name" id="floatingInput" required>
+                            <label id="labelName" for="floatingInput">Name Seminar</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input id="contents" value="<?php echo old('content'); ?>" type="text" class="form-control"
-                                name="content" id="floatingInput" required >
+                                name="content" id="floatingInput" required>
                             <label id="labelContent" for="floatingInput">Content Seminar</label>
                         </div>
 
@@ -100,7 +99,8 @@
 @section('js')
     <script type="text/javascript">
         $(document).ready(function() {
-
+            
+         
             $(document).on('click', '#select-all', function(event) {
                 if (this.checked) {
                     $('#deleteAllBtn').removeAttr('disabled');
@@ -128,28 +128,8 @@
                 }
             })
 
-            function fetch_data(sort_type = '', column_name = '') {
-                $.ajax({
-                    url: '/seminar/sort_seminar?sortby=' + sort_type + "&columnName=" + column_name,
-                    success: function(data) {
-                        $('.alldata').empty();
-                        $('.alldata').html(data);
-                    }
-                })
-            }
-            $(document).on('click', '.seminar_sorting', function() {
-                var column_name = $(this).data('column_name');
-                var sort_type = $(this).data('sorting_type');
-                var reverse_order = '';
-                if (sort_type == 'asc') {
-                    $(this).data('sorting_type', 'desc');
-                    reverse_order = 'desc';
-                } else {
-                    $(this).data('sorting_type', 'asc');
-                    reverse_order = 'asc';
-                }
-                fetch_data(reverse_order, column_name);
-            })
+
+
             $("#myBtn").click(function() {
                 $("#myModal").modal("show");
             })
@@ -161,7 +141,7 @@
                 let loader = document.querySelector('#loading')
                 loader.style.display = 'block';
                 loader.classList.remove('hidden');
-                setTimeout(() => loader.style.display = 'none', 10000);
+                setTimeout(() => loader.style.display = 'none', 1000);
                 $('#name').attr('hidden', 'hidden');
                 $('#labelName').attr('hidden', 'hidden');
                 $('#testbtn').attr('hidden', 'hidden');
@@ -187,7 +167,7 @@
                         'name': name,
                         'content': content,
                         'timestart': timestart,
-                        'timeend': timeend
+                        'timeend': timeend,
                     },
                     success: function(data) {
                         $('#name').removeAttr('hidden');
@@ -200,12 +180,12 @@
                         $('#timeEnd').removeAttr('hidden');
                         $('#labelTimeEnd').removeAttr('hidden');
                         $("#myModal").modal("hide");
-                        setTimeout(() =>  Swal.fire({
-                                type: 'success',
-                                title: 'Nofication',
-                                text: 'Added Successed',
-                            }), 1400);
-                            $('#item-lists').html(data.html);
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Nofication',
+                            text: 'Added Successed',
+                        });
+                        $('#item-lists').html(data.html);
                     },
                     error: (error) => {
                         console.log(error);
@@ -251,12 +231,13 @@
                     }
                 })
             });
+
             $(document).on('click', '.pagination a', function(event) {
                 event.preventDefault();
-                var myurl = $(this).attr('href');
                 var page = $(this).attr('href').split('page=')[1];
-                getData(page);
+                getData(page)
             });
+            
             $('#filterser').on('change', function() {
                 var select = $("#filterser option:selected").val();
                 if (select) {
@@ -296,7 +277,7 @@
                     })
                     .done(function(data) {
                         $("#item-lists").empty().html(data);
-                        location.hash =page;
+                        location.hash = page;
                     })
                     .fail(function(jqXHR, ajaxOptions, thrownError) {
                         alert('No response from server');
@@ -323,7 +304,7 @@
                         'search': $value,
                     },
                     success: function(data) {
-                        console.log(data);
+                       
                         $('.searchdata').html(data);
                     },
                     error: (error) => {
