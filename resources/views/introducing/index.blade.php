@@ -5,7 +5,8 @@
   <!-- Main Content -->
   <div class="container">
     <div class="search">
-        <input type="search" name="search" id="search" placeholder="Search introducing here" class="form-control" >
+      
+        <input  type="search" name="search" id="search"  placeholder="Search introducing here" class="form-control " >
     </div>
 </div>
       <div class="container-fluid">
@@ -17,7 +18,7 @@
               <form action="">
                   <div class="select-container">
                       <select  id="filterser">
-                          <option>ALL</option>
+                          <option>Seach All</option>
                           @foreach (\App\Constants\GlobalConstants::LIST as $item)
                           <option>{{$item}}</option>
                           @endforeach
@@ -36,6 +37,7 @@
                      </button>
               </h1>
               <button type="button" id="myBtn"  class="btn btn-primary">
+                <i class="bi bi-sign-intersection-fill"></i>
                  Add Introducing-Leter
                 </button>
     </div>
@@ -107,7 +109,7 @@
       });
       $.ajax({
           method:"POST",
-          url:"/checkAdd",
+          url:"/checkAddintroducing",
           data:{
               'name':name,
               'content':content,

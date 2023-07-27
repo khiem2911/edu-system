@@ -47,7 +47,7 @@ class IntroducingLetterController extends Controller
         $query=false;
         $values = array('name' => $name,'content' => $content,'timestart'=>$timestart,'timeend'=>$timeend);
         try{
-            $query=DB::table('Introducing')->insert($values);
+            $query= DB::table('Introducing')->insert($values);
             $data = DB::table('Introducing')->paginate(5);
             $html = view('introducing.data', compact('data'))->render();
             return response()->json([
