@@ -194,7 +194,7 @@
                 });
                 $.ajax({
                     method: "POST",
-                    url: "/checkAdd",
+                    url: "/ ",
                     data: {
                         'name': name,
                         'address': address,

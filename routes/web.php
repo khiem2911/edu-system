@@ -50,7 +50,7 @@ Route::get('EditEssay/{id}',[EssayController::class, 'editEssay'])->name("editEs
 Route::post('updateEssay/{id}',[EssayController::class, 'updateEssay'])->name("updateEssay");
 Route::get('filterEssay',[EssayController::class, 'filterEssay'])->name("filterEssay");
 Route::get('/searchEssay',[EssayController::class, 'searchEssay'])->name("searchEssay");
-Route::get('checkAdd',[EssayController::class, 'addEssay'])->name("addEssay");
+Route::post('checkAddEssay',[EssayController::class, 'addEssay'])->name("addEssay");
 Route::get('/essay/sort_essay',[EssayController::class, 'sortEssay'])->name("sortEssay");
 
 
@@ -62,17 +62,8 @@ Route::get('EditCertipicate/{id}',[CertipicateController::class, 'editCertipicat
 Route::post('updateCertipicate/{id}',[CertipicateController::class, 'updateCertipicate'])->name("updateCertipicate");
 Route::get('filterCertipicate',[CertipicateController::class, 'filterCertipicate'])->name("filterCertipicate");
 Route::get('/searchCertipicate',[CertipicateController::class, 'searchCertipicate'])->name("searchCertipicate");
-Route::get('checkAdd',[CertipicateController::class, 'addCertipicate'])->name("addCertipicate");
+Route::post('checkAddCertipicate',[CertipicateController::class, 'addCertipicate'])->name("addCertipicate");
 Route::get('/certipicate/sort_certipicate',[CertipicateController::class, 'sortCertipicate'])->name("sortCertipicate");
 
 
-//Quốc
-Route::get('/introducing', [IntroducingLetterController::class, 'loadData'])->name("homeIntroducing");
-Route::get('/checkDeleteintroducing',[IntroducingLetterController::class, 'deleteIntroducing'])->name("deleteIntroducing");
-Route::post('deleteAllintroducing',[IntroducingLetterController::class, 'deleteAllIntroducing'])->name("deleteAllintroducing");
-Route::get('EditSerintroducing/{id}',[IntroducingLetterController::class, 'editIntroducing'])->name("editIntroducing");
-Route::post('updateintroducing/{id}',[IntroducingLetterController::class, 'updateIntroducing'])->name("updateIntroducing");
-Route::get('/searchintroducing',[IntroducingLetterController::class, 'searchIntroducing'])->name("searchIntroducing");
-Route::get('/filterintroducing',[IntroducingLetterController::class, 'filterIntroducing'])->name("filterIntroducing");
-Route::post('checkAddintroducing',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");
 

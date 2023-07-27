@@ -39,10 +39,10 @@ class EssayController extends Controller
     }
     public function addEssay(Request $request)
     {
-        $name = $request->name;
-        $address = $request->address;
-        $essaytitle = $request->essaytitle;
-        $content = $request->content;
+        $name = $request->get('name'); 
+        $address = $request->get('address');
+        $essaytitle = $request->get('essaytitle');
+        $content = $request->get('content');
         $query = false;
 
         $request->session()->flush();

@@ -78,7 +78,7 @@
                         <label id="labelEssayTitle" for="floatingInput">Essay Title </label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input id="content" value="<?php echo old('content'); ?>" type="text" class="form-control" name="content" id="floatingInput" required>
+                        <input id="contentss" value="<?php echo old('contentss'); ?>" type="text" class="form-control" name="contentss" id="floatingInput" required>
                         <label id="labelContent" for="floatingInput">Content Essay</label>
                     </div>
 
@@ -169,12 +169,13 @@
             $('#labelAddress').attr('hidden', 'hidden');
             $('#essaytitle').attr('hidden', 'hidden');
             $('#labelEssayTitle').attr('hidden', 'hidden');
-            $('#content').attr('hidden', 'hidden');
+            $('#contentss').attr('hidden', 'hidden');
             $('#labelContent').attr('hidden', 'hidden');
             var name = $('#name').val();
             var address = $('#address').val();
             var essaytitle = $('#essaytitle').val();
-            var content = $('#content').val();
+            var content = $('#contentss').val();
+            console.log(content);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -182,7 +183,7 @@
             });
             $.ajax({
                 method: "POST",
-                url: "/checkAdd",
+                url: "/checkAddEssay",
                 data: {
                     'name': name,
                     'address': address,
