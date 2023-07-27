@@ -162,7 +162,7 @@
                 });
                 $.ajax({
                     method: "POST",
-                    url: "/checkAdd",
+                    url: "/checkAddSer",
                     data: {
                         'name': name,
                         'content': content,
