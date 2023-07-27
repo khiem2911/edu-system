@@ -7,6 +7,7 @@
 <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.112.5">
 <title>EduSystem</title>
+<link rel="stylesheet" href="../resources/css/fonts/themify-icons/themify-icons.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <meta name="theme-color" content="#712cf9">
@@ -683,6 +684,14 @@
                                         <use xlink:href="#file-earmark" />
                                     </svg>
                                     Certipicate
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center gap-2" href="{{ url('/introducing') }}">
+                                    <svg class="bi">
+                                        <use xlink:href="#file-earmark" />
+                                    </svg>
+                                    introducing
                                 </a>
                             </li>
                             <li class="nav-item">
