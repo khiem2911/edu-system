@@ -1,5 +1,5 @@
 <table class="table table-hover">
-    <thead class="table-primary">
+    <thead class="table-primary ">
         <tr>
             <th></th>
             <th>ID</th>
@@ -7,7 +7,7 @@
             <th>Content</th>
             <th>Time start</th>
             <th>Time end</th>
-            <th></th>
+            <th> Edit </th>
         </tr>
     </thead>
     <tbody class="alldata">
@@ -23,8 +23,10 @@
             <input id="idser" type="hidden" value="{{$item->id}}">
             <td class="align-middle">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                     <a  href="{{route("editIntroducing",$item->id)}}" class="btn btn-warning">Edit</a>
-                     <a id="deletebtn" data-id="{{$item->id}}"  href="" class="btn btn-danger">Delete</a>
+                    
+                     <a  href="{{route("editIntroducing",$item->id)}}" class="btn btn-warning"><i class="bi bi-brush"></i>Edit</a>
+                     
+                     <a id="deletebtn" data-id="{{$item->id}}"  href="" class="btn btn-danger"><i class="bi bi-scissors"></i>Delete</a>
                      
                 </div>
             </td>

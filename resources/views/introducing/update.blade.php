@@ -78,12 +78,12 @@
                         </div>
                     </form>
                 </nav>
-             <div class="card" style="margin:20px;">
+             <div class="card" style="margin:20px; ">
                     <div class="card-header">
                        <h4>Edit Introducing</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route("updateSeminar",$data->id)}}" method="POST">
+                        <form action="{{route("updateIntroducing",$data->id)}}" method="POST">
                             {{ csrf_field() }}
                             <label for="">Name</label><br>
                             <input value="{{$data->name}}" type="text" name="name" id="" class="form-control">
