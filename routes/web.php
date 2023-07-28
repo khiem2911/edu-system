@@ -54,9 +54,13 @@ Route::post('checkAddEssay',[EssayController::class, 'addEssay'])->name("addEssa
 Route::get('/essay/sort_essay',[EssayController::class, 'sortEssay'])->name("sortEssay");
 
 
+
+
+
+
 //oanh
 Route::get('/certipicate', [CertipicateController::class, 'loadData'])->name("homeCertipicate");
-Route::get('/DeleteCertipicate',[CertipicateController::class, 'loadData'])->name("DeleteCertipicate");
+Route::get('/checkDelete',[CertipicateController::class, 'DeleteCertipicate'])->name("DeleteCertipicate");
 Route::post('deleteAllCertipicate',[CertipicateController::class, 'deleteAllCertipicate'])->name("deleteAllCertipicate");
 Route::get('EditCertipicate/{id}',[CertipicateController::class, 'editCertipicate'])->name("editCertipicate");
 Route::post('updateCertipicate/{id}',[CertipicateController::class, 'updateCertipicate'])->name("updateCertipicate");
@@ -66,4 +70,12 @@ Route::post('checkAddCertipicate',[CertipicateController::class, 'addCertipicate
 Route::get('/certipicate/sort_certipicate',[CertipicateController::class, 'sortCertipicate'])->name("sortCertipicate");
 
 
-
+//Quốc
+Route::get('/introducing', [IntroducingLetterController::class, 'loadData'])->name("homeIntroducing");
+Route::get('/checkDeleteintroducing',[IntroducingLetterController::class, 'deleteIntroducing'])->name("deleteIntroducing");
+Route::post('deleteAllintroducing',[IntroducingLetterController::class, 'deleteAllIntroducing'])->name("deleteAllintroducing");
+Route::get('EditSerintroducing/{id}',[IntroducingLetterController::class, 'editIntroducing'])->name("editIntroducing");
+Route::post('updateintroducing/{id}',[IntroducingLetterController::class, 'updateIntroducing'])->name("updateIntroducing");
+Route::get('/searchintroducing',[IntroducingLetterController::class, 'searchIntroducing'])->name("searchIntroducing");
+Route::get('/filterintroducing',[IntroducingLetterController::class, 'filterIntroducing'])->name("filterIntroducing");
+Route::post('checkAddintroducing',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");

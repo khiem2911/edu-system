@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <form method="post" action="{{ url('deleteAll') }}">
+            <form method="post" action="{{ url('deleteAllCertipicate') }}">
                 {{ csrf_field() }}
                 <div class="d-flex align-items-center justify-content-between">
                     <h1 class="mb-0">
@@ -183,10 +183,10 @@
                 $('#labelEmail').attr('hidden', 'hidden');
                 var name = $('#name').val();
                 var address = $('#address').val();
-                var dateofbidth = $('#dateofbidth').val();
+                var dateofbidth = $('#dateofbirth').val();
                 var phone = $('#phone').val();
                 var email = $('#email').val();
-
+            console .log(dateofbidth);
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -194,7 +194,7 @@
                 });
                 $.ajax({
                     method: "POST",
-                    url: "/ ",
+                    url: "/checkAddCertipicate",
                     data: {
                         'name': name,
                         'address': address,

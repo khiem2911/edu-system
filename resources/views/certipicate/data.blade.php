@@ -31,6 +31,7 @@
                 <td class="align-middle">{{ $item->email }}</td>
                 <input id="idser" type="hidden" value="{{ $item->id }}">
                 <td class="align-middle">
+                  
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a href="{{ route('editCertipicate', $item->id) }}" class="btn btn-warning">Edit</a>
                         <a id="deletebtn" data-id="{{ $item->id }}" href="" class="btn btn-danger">Delete</a>

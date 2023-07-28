@@ -40,7 +40,7 @@ class CertipicateController extends Controller
     {
         $name = $request->name;
         $address = $request->address;
-        $dateofbirth = $request->dateofbirth;
+        $dateofbirth = $request->get("dateofbidth");
         $phone = $request->phone;
         $email = $request->email;
         $query = false;
