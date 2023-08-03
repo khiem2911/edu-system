@@ -77,17 +77,15 @@
                             <label id="labelContent" for="floatingInput">Content Seminar</label>
                         </div>
 
+                        <label>Time start</label>
                         <br>
-                        <div class="d-flex justify-content-center">
-                            <div id="loading" class="spinner-border hidden" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                        </div>
-                        <h3><b id="labelTimeStart">Time start</b> </h3>
                         <input required id="timeStart" name="timestart" type="datetime-local" value="<?php echo old('timestart'); ?>" />
                         <br>
-                        <h3><b id="labelTimeEnd">Time end</b></h3>
+                        <br>
+                        <label >Time end</label>
+                        <br>
                         <input required id="timeEnd" name="timeend" type="datetime-local" value="<?php echo old('timeend'); ?>" />
+                        <br>
                         <br>
                         <button id="testbtn" type="submit" class="btn btn-primary">Save changes</button>
                     </form>
@@ -138,19 +136,6 @@
             })
             $('#comment').on('submit', function(e) {
                 e.preventDefault();
-                let loader = document.querySelector('#loading')
-                loader.style.display = 'block';
-                loader.classList.remove('hidden');
-                setTimeout(() => loader.style.display = 'none', 1000);
-                $('#name').attr('hidden', 'hidden');
-                $('#labelName').attr('hidden', 'hidden');
-                $('#testbtn').attr('hidden', 'hidden');
-                $('#contents').attr('hidden', 'hidden');
-                $('#labelContent').attr('hidden', 'hidden');
-                $('#timeStart').attr('hidden', 'hidden');
-                $('#labelTimeStart').attr('hidden', 'hidden');
-                $('#timeEnd').attr('hidden', 'hidden');
-                $('#labelTimeEnd').attr('hidden', 'hidden');
                 var name = $('#name').val();
                 var content = $('#contents').val();
                 var timestart = $('#timeStart').val();
@@ -170,16 +155,7 @@
                         'timeend': timeend,
                     },
                     success: function(data) {
-                        $('#name').removeAttr('hidden');
-                        $('#labelName').removeAttr('hidden');
-                        $('#testbtn').removeAttr('hidden');
-                        $('#contents').removeAttr('hidden');
-                        $('#labelContent').removeAttr('hidden');
-                        $('#timeStart').removeAttr('hidden');
-                        $('#labelTimeStart').removeAttr('hidden');
-                        $('#timeEnd').removeAttr('hidden');
-                        $('#labelTimeEnd').removeAttr('hidden');
-                        $("#myModal").modal("hide");
+                        
                         Swal.fire({
                             type: 'success',
                             title: 'Nofication',

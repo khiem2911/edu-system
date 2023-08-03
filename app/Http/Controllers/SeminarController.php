@@ -85,6 +85,11 @@ class SeminarController extends Controller
         $content = $request->content;
         $timestart = $request->timestart;
         $timeend = $request->timeend;
+        if($name==null||$content==null||$timestart==null||$timeend==null){
+            alert()->warning('PLEASE DO NOT EMPTY');
+            return redirect()->route('editSeminar',['id'=>$id]);
+        }else
+        {
         $values = ['name' => $name, 'content' => $content, 'timestart' => $timestart, 'timeend' => $timeend];
         $query = DB::table('seminar')
             ->where('id', '=', $id)
@@ -93,6 +98,7 @@ class SeminarController extends Controller
             alert()->success('Update Successed');
         }
         return redirect()->route('homeSerminar');
+    }
     }
     public function editSeminar($id)
     {
@@ -106,7 +112,7 @@ class SeminarController extends Controller
         $select = $request->select;
         $output = '';
         if ($select) {
-            if ($select == 'Theo thứ tự giảm dần') {
+            if ($select == 'Theo thứ tự ID giảm dần') {
                 $data = DB::table('seminar')
                     ->orderBy('id', 'DESC')
                     ->paginate(5);
@@ -149,7 +155,7 @@ class SeminarController extends Controller
                 }
                 return response($output);
             }
-            if ($select == 'A tới Z') {
+            if ($select == 'A tới Z(Name Seminar)') {
                 $data = DB::table('seminar')
                     ->orderBy('name', 'ASC')
                     ->paginate(5);
