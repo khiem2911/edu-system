@@ -20,12 +20,15 @@
                 <div class="mb-0 ">
                     <form action="">
                         <div class="select-container">
-                            <select id="filterser">
+                            <div style="display: flex;">
+                            <b style="color: black">Sort: </b>
+                             <select id="filterser">
                                 <option>ALL</option>
                                 @foreach (\App\Constants\GlobalConstants::LIST as $item)
                                     <option>{{ $item }}</option>
                                 @endforeach
                             </select>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -100,6 +103,7 @@
             
          
             $(document).on('click', '#select-all', function(event) {
+                console.log(this.checked);
                 if (this.checked) {
                     $('#deleteAllBtn').removeAttr('disabled');
                     $(':checkbox').each(function() {
@@ -120,7 +124,8 @@
                 if (this.checked) {
                     $('#deleteAllBtn').removeAttr('disabled');
                 } else {
-                    if (arr.length == 0) {
+                    if (arr.length == 0) { 
+                        $( "#select-all").prop('checked', false);
                         $('#deleteAllBtn').attr('disabled', 'disabled');
                     }
                 }
@@ -155,7 +160,7 @@
                         'timeend': timeend,
                     },
                     success: function(data) {
-                        
+                        $("#myModal").modal("hide");
                         Swal.fire({
                             type: 'success',
                             title: 'Nofication',

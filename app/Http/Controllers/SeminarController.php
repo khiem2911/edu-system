@@ -79,15 +79,17 @@ class SeminarController extends Controller
             'html' => $html,
         ]);
     }
-    public function updateSeminar(Request $request, $id)
+    public function updateSeminar(Request $request)
     {
-        $name = $request->name;
-        $content = $request->content;
-        $timestart = $request->timestart;
-        $timeend = $request->timeend;
+        $name = $request->get('name');
+        $content = $request->get('content');
+        $timestart = $request->get('timestart');
+        $timeend = $request->get('timeend');
+        $id = $request->get('id');
         if($name==null||$content==null||$timestart==null||$timeend==null){
-            alert()->warning('PLEASE DO NOT EMPTY');
-            return redirect()->route('editSeminar',['id'=>$id]);
+            return response()->json([
+                'status' => false,
+            ]);
         }else
         {
         $values = ['name' => $name, 'content' => $content, 'timestart' => $timestart, 'timeend' => $timeend];
@@ -95,9 +97,10 @@ class SeminarController extends Controller
             ->where('id', '=', $id)
             ->update($values);
         if ($query) {
-            alert()->success('Update Successed');
-        }
-        return redirect()->route('homeSerminar');
+            return response()->json([
+                'status' => true,
+            ]);
+        };
     }
     }
     public function editSeminar($id)
