@@ -46,7 +46,6 @@
                         'timeend': timeend,
                     },
                     success: function(data) {
-                        console.log(data);
                         if(data.status==false)
                         {
                             Swal.fire({
