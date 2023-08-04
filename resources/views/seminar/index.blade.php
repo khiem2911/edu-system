@@ -20,12 +20,15 @@
                 <div class="mb-0 ">
                     <form action="">
                         <div class="select-container">
-                            <select id="filterser">
+                            <div style="display: flex;">
+                            <b style="color: black">Sort: </b>
+                             <select id="filterser">
                                 <option>ALL</option>
                                 @foreach (\App\Constants\GlobalConstants::LIST as $item)
                                     <option>{{ $item }}</option>
                                 @endforeach
                             </select>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -77,17 +80,15 @@
                             <label id="labelContent" for="floatingInput">Content Seminar</label>
                         </div>
 
+                        <label>Time start</label>
                         <br>
-                        <div class="d-flex justify-content-center">
-                            <div id="loading" class="spinner-border hidden" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                        </div>
-                        <h3><b id="labelTimeStart">Time start</b> </h3>
                         <input required id="timeStart" name="timestart" type="datetime-local" value="<?php echo old('timestart'); ?>" />
                         <br>
-                        <h3><b id="labelTimeEnd">Time end</b></h3>
+                        <br>
+                        <label >Time end</label>
+                        <br>
                         <input required id="timeEnd" name="timeend" type="datetime-local" value="<?php echo old('timeend'); ?>" />
+                        <br>
                         <br>
                         <button id="testbtn" type="submit" class="btn btn-primary">Save changes</button>
                     </form>
@@ -102,6 +103,7 @@
             
          
             $(document).on('click', '#select-all', function(event) {
+                console.log(this.checked);
                 if (this.checked) {
                     $('#deleteAllBtn').removeAttr('disabled');
                     $(':checkbox').each(function() {
@@ -122,7 +124,8 @@
                 if (this.checked) {
                     $('#deleteAllBtn').removeAttr('disabled');
                 } else {
-                    if (arr.length == 0) {
+                    if (arr.length == 0) { 
+                        $( "#select-all").prop('checked', false);
                         $('#deleteAllBtn').attr('disabled', 'disabled');
                     }
                 }
@@ -138,19 +141,6 @@
             })
             $('#comment').on('submit', function(e) {
                 e.preventDefault();
-                let loader = document.querySelector('#loading')
-                loader.style.display = 'block';
-                loader.classList.remove('hidden');
-                setTimeout(() => loader.style.display = 'none', 1000);
-                $('#name').attr('hidden', 'hidden');
-                $('#labelName').attr('hidden', 'hidden');
-                $('#testbtn').attr('hidden', 'hidden');
-                $('#contents').attr('hidden', 'hidden');
-                $('#labelContent').attr('hidden', 'hidden');
-                $('#timeStart').attr('hidden', 'hidden');
-                $('#labelTimeStart').attr('hidden', 'hidden');
-                $('#timeEnd').attr('hidden', 'hidden');
-                $('#labelTimeEnd').attr('hidden', 'hidden');
                 var name = $('#name').val();
                 var content = $('#contents').val();
                 var timestart = $('#timeStart').val();
@@ -162,7 +152,7 @@
                 });
                 $.ajax({
                     method: "POST",
-                    url: "/checkAdd",
+                    url: "/checkAddSer",
                     data: {
                         'name': name,
                         'content': content,
@@ -170,15 +160,6 @@
                         'timeend': timeend,
                     },
                     success: function(data) {
-                        $('#name').removeAttr('hidden');
-                        $('#labelName').removeAttr('hidden');
-                        $('#testbtn').removeAttr('hidden');
-                        $('#contents').removeAttr('hidden');
-                        $('#labelContent').removeAttr('hidden');
-                        $('#timeStart').removeAttr('hidden');
-                        $('#labelTimeStart').removeAttr('hidden');
-                        $('#timeEnd').removeAttr('hidden');
-                        $('#labelTimeEnd').removeAttr('hidden');
                         $("#myModal").modal("hide");
                         Swal.fire({
                             type: 'success',
