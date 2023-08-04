@@ -66,6 +66,7 @@ Route::get('checkAdd',[CertipicateController::class, 'addCertipicate'])->name("a
 Route::get('/certipicate/sort_certipicate',[CertipicateController::class, 'sortCertipicate'])->name("sortCertipicate");
 
 
+
 //Quốc
 Route::get('/introducing', [IntroducingLetterController::class, 'loadData'])->name("homeIntroducing");
 Route::get('/checkDeleteintroducing',[IntroducingLetterController::class, 'deleteIntroducing'])->name("deleteIntroducing");
@@ -74,4 +75,4 @@ Route::get('EditSerintroducing/{id}',[IntroducingLetterController::class, 'editI
 Route::post('updateintroducing/{id}',[IntroducingLetterController::class, 'updateIntroducing'])->name("updateIntroducing");
 Route::get('/searchintroducing',[IntroducingLetterController::class, 'searchIntroducing'])->name("searchIntroducing");
 Route::get('/filterintroducing',[IntroducingLetterController::class, 'filterIntroducing'])->name("filterIntroducing");
-Route::post('checkAddintroducing',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");
+Route::post('checkAddIn',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");
