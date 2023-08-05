@@ -1,5 +1,5 @@
 
-<table class="table table-hover table-bordered">
+<table class="table table-hover table-bordered" >
     <thead class="table-primary">
         <tr>
             <th>
@@ -19,7 +19,7 @@
             <th style="width:13%;">Actions</th>
         </tr>
     </thead>
-    <tbody class="alldata">
+    <tbody class="alldata" id="dataEssay">
         @foreach ($data as $item)
             <tr>
                 <td class="text-center align-middle "><input name='checkbox[]' type="checkbox" id="checkItem" value="{{ $item->id }}"></td>

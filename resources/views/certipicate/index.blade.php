@@ -221,6 +221,7 @@
                                 text: 'Added Successed',
                             }), 1400);
                             $('#item-lists').html(data.html);
+                            window.location.reload();
                     },
                     error: (error) => {
                         console.log(error);

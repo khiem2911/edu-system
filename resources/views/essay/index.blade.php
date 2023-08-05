@@ -78,7 +78,8 @@
                         <label id="labelEssayTitle" for="floatingInput">Essay Title </label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input id="contentss" value="<?php echo old('contentss'); ?>" type="text" class="form-control" name="contentss" id="floatingInput" required>
+                        <textarea id="contentss" class="form-control" name="contentss" id="floatingInput" required><?php echo old('contentss'); ?></textarea>
+                        <!-- <input id="contentss" value="<?php echo old('contentss'); ?>" type="text" class="form-control" name="contentss" id="floatingInput" required> -->
                         <label id="labelContent" for="floatingInput">Content Essay</label>
                     </div>
 
@@ -206,7 +207,9 @@
                         title: 'Nofication',
                         text: 'Added Successed',
                     }), 1400);
-                    $('#item-lists').html(data.html);
+                    // $('#item-lists').html(data.html);
+                    window.location.reload();
+                   
                 },
                 error: (error) => {
                     console.log(error);
