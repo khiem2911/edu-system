@@ -21,7 +21,7 @@
                     <div class="select-container">
                         <select id="filterEssay">
                             <option>ALL</option>
-                            @foreach (\App\Constants\GlobalConstants::LIST as $item)
+                            @foreach (\App\ConstantsEssay\GlobalConstantsEssay::LIST as $item)
                             <option>{{ $item }}</option>
                             @endforeach
                         </select>
