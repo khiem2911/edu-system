@@ -79,12 +79,7 @@ Route::get('EditSerintroducing/{id}',[IntroducingLetterController::class, 'editI
 Route::post('updateintroducing/{id}',[IntroducingLetterController::class, 'updateIntroducing'])->name("updateIntroducing");
 Route::get('/searchintroducing',[IntroducingLetterController::class, 'searchIntroducing'])->name("searchIntroducing");
 Route::get('/filterintroducing',[IntroducingLetterController::class, 'filterIntroducing'])->name("filterIntroducing");
-<<<<<<< HEAD
-<<<<<<< HEAD
 Route::post('checkAddintroducing',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");
-=======
 Route::post('checkAddintroducing',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");
->>>>>>> f01151d7c0ce4306aac846f72c02403b29a86c75
-=======
 Route::post('checkAddIn',[IntroducingLetterController::class, 'addIntroducing'])->name("addIntroducing");
->>>>>>> b27398c1797a5dc442033e16aca987910f658c30
+

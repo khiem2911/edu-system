@@ -121,7 +121,7 @@ class EssayController extends Controller
                 }
                 return response($output);
             }
-            if ($select == 'A tới Z (name Essay)') {
+            if ($select == 'A tới Z(Name)') {
                 $data = DB::table('Essay')
                     ->orderBy('name', 'ASC')
                     ->paginate(5);

@@ -96,7 +96,7 @@ class CertipicateController extends Controller
         $select = $request->select;
         $output = '';
         if ($select) {
-            if ($select == 'Theo thứ tự giảm dần') {
+            if ($select == 'Theo thứ tự ID giảm dần') {
                 $data = DB::table('card_activation')
                     ->orderBy('id', 'DESC')
                     ->paginate(5);
@@ -142,7 +142,7 @@ class CertipicateController extends Controller
                 }
                 return response($output);
             }
-            if ($select == 'A tới Z') {
+            if ($select == 'A tới Z(Name)') {
                 $data = DB::table('card_activation')
                     ->orderBy('name', 'ASC')
                     ->paginate(5);
