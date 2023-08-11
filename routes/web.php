@@ -74,7 +74,7 @@ Route::get('/certipicate/sort_certipicate',[CertipicateController::class, 'sortC
 //Quốc
 Route::get('/introducing', [IntroducingLetterController::class, 'loadData'])->name("homeIntroducing");
 Route::get('/checkDeleteintroducing',[IntroducingLetterController::class, 'deleteIntroducing'])->name("deleteIntroducing");
-Route::post('deleteAllintroducing',[IntroducingLetterController::class, 'deleteAllIntroducing'])->name("deleteAllintroducing");
+Route::post('deleteAllIntroducing',[IntroducingLetterController::class, 'deleteAllIntroducing'])->name("deleteAllIntroducing");
 Route::get('EditSerintroducing/{id}',[IntroducingLetterController::class, 'editIntroducing'])->name("editIntroducing");
 Route::post('updateintroducing/{id}',[IntroducingLetterController::class, 'updateIntroducing'])->name("updateIntroducing");
 Route::get('/searchintroducing',[IntroducingLetterController::class, 'searchIntroducing'])->name("searchIntroducing");

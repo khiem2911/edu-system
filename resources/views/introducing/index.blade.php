@@ -19,7 +19,7 @@
                         <div class="select-container">
                             <select id="filterIn">
                                 <option>Seach All</option>
-                                @foreach (\App\Constants\GlobalConstants::LIST as $item)
+                                @foreach (\App\ConstantsIn\GlobalConstantsIn::LIST as $item)
                                     <option>{{ $item }}</option>
                                 @endforeach
                             </select>
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <form method="post" action="{{ url('deleteAll') }}">
+            <form method="post" action="{{ url('deleteAllIntroducing') }}">
                 {{ csrf_field() }}
                 <div class="d-flex align-items-center justify-content-between">
                     <h1 class="mb-0">
@@ -125,7 +125,8 @@
                                 title: 'Nofication',
                                 text: 'Added Successed',
                             }),
-                            $('#item-lists').html(data.html);
+                            window.location.reload();
+                            // $('#item-lists').html(data.html);
                     },
                     error: (error) => {
                         console.log(error);

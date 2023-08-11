@@ -163,7 +163,7 @@ class IntroducingLetterController extends Controller
                 }
                 return response($output);
             }
-            if ($select == 'A tới Z(Name Introducing)') {
+            if ($select == 'A tới Z(Name)') {
                 $data = DB::table('introducing')
                     ->orderBy('name', 'ASC')
                     ->paginate(5);
