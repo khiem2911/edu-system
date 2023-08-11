@@ -60,7 +60,7 @@ Route::get('/essay/sort_essay',[EssayController::class, 'sortEssay'])->name("sor
 
 //oanh
 Route::get('/certipicate', [CertipicateController::class, 'loadData'])->name("homeCertipicate");
-Route::get('/checkDelete',[CertipicateController::class, 'DeleteCertipicate'])->name("DeleteCertipicate");
+Route::get('/checkDeleteCer',[CertipicateController::class, 'DeleteCertipicate'])->name("DeleteCertipicate");
 Route::post('deleteAllCertipicate',[CertipicateController::class, 'deleteAllCertipicate'])->name("deleteAllCertipicate");
 Route::get('EditCertipicate/{id}',[CertipicateController::class, 'editCertipicate'])->name("editCertipicate");
 Route::post('updateCertipicate/{id}',[CertipicateController::class, 'updateCertipicate'])->name("updateCertipicate");
